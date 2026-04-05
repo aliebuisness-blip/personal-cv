@@ -45,6 +45,10 @@ export default function Contact() {
           box-sizing: border-box;
         }
 
+        html, body {
+          overflow-x: hidden;
+        }
+
         .container {
           width: min(1240px, calc(100% - 32px));
           margin: 0 auto;
@@ -57,7 +61,7 @@ export default function Contact() {
 
         .hero-card {
           display: grid;
-          grid-template-columns: 1.1fr 0.9fr;
+          grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
           gap: 22px;
           border-radius: 30px;
           overflow: hidden;
@@ -74,6 +78,7 @@ export default function Contact() {
           flex-direction: column;
           justify-content: center;
           min-height: 420px;
+          min-width: 0;
         }
 
         .hero-right {
@@ -81,6 +86,7 @@ export default function Contact() {
           display: flex;
           align-items: stretch;
           justify-content: center;
+          min-width: 0;
         }
 
         .hero-visual {
@@ -94,22 +100,7 @@ export default function Contact() {
           display: grid;
           gap: 14px;
           padding: 22px;
-        }
-
-        .visual-box {
-          border-radius: 18px;
-          border: 1px solid rgba(255,255,255,0.08);
-          background: rgba(255,255,255,0.03);
-        }
-
-        .visual-box.large {
-          min-height: 180px;
-        }
-
-        .visual-row {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 14px;
+          min-width: 0;
         }
 
         .badge-row {
@@ -126,6 +117,8 @@ export default function Contact() {
           background: rgba(255,255,255,0.04);
           color: rgba(255,255,255,0.78);
           font-size: 12px;
+          max-width: 100%;
+          word-break: break-word;
         }
 
         .badge.accent {
@@ -146,6 +139,7 @@ export default function Contact() {
           font-size: clamp(42px, 7vw, 78px);
           line-height: 0.96;
           letter-spacing: -0.07em;
+          overflow-wrap: anywhere;
         }
 
         .hero-copy {
@@ -178,14 +172,14 @@ export default function Contact() {
         .section-copy {
           margin: 0;
           color: rgba(255,255,255,0.64);
-          max-width: 760px;
+          maxWidth: 760px;
           line-height: 1.8;
           font-size: 15px;
         }
 
         .contact-grid {
           display: grid;
-          grid-template-columns: 1.05fr 0.95fr;
+          grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
           gap: 20px;
           margin-top: 24px;
         }
@@ -196,6 +190,7 @@ export default function Contact() {
           border-radius: 24px;
           padding: 28px;
           transition: 0.28s ease;
+          min-width: 0;
         }
 
         .card:hover,
@@ -225,6 +220,7 @@ export default function Contact() {
           background: rgba(255,255,255,0.03);
           transition: 0.28s ease;
           text-decoration: none;
+          min-width: 0;
         }
 
         .contact-icon {
@@ -237,6 +233,7 @@ export default function Contact() {
           display: flex;
           align-items: center;
           justify-content: center;
+          flex: 0 0 auto;
         }
 
         .contact-label {
@@ -252,6 +249,7 @@ export default function Contact() {
           font-size: 15px;
           line-height: 1.7;
           word-break: break-word;
+          overflow-wrap: anywhere;
         }
 
         .cta-row {
@@ -273,6 +271,9 @@ export default function Contact() {
           font-weight: 700;
           font-size: 14px;
           transition: 0.22s ease;
+          min-height: 48px;
+          line-height: 1.2;
+          text-align: center;
         }
 
         .btn-primary:hover {
@@ -293,6 +294,9 @@ export default function Contact() {
           font-weight: 600;
           font-size: 14px;
           transition: 0.22s ease;
+          min-height: 48px;
+          line-height: 1.2;
+          text-align: center;
         }
 
         .btn-secondary:hover {
@@ -317,34 +321,7 @@ export default function Contact() {
           background: rgba(255,255,255,0.03);
           transition: 0.28s ease;
           text-decoration: none;
-        }
-
-        .quick-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 16px;
-          margin-top: 18px;
-        }
-
-        .quick-card {
-          padding: 18px;
-          border-radius: 20px;
-          border: 1px solid rgba(255,255,255,0.08);
-          background: rgba(255,255,255,0.03);
-          transition: 0.28s ease;
-        }
-
-        .quick-title {
-          font-size: 18px;
-          font-weight: 700;
-          letter-spacing: -0.03em;
-          margin-bottom: 8px;
-        }
-
-        .quick-copy {
-          color: rgba(255,255,255,0.62);
-          line-height: 1.75;
-          font-size: 14px;
+          min-width: 0;
         }
 
         .faq-list {
@@ -374,138 +351,398 @@ export default function Contact() {
           font-size: 14px;
         }
 
-        @media (max-width: 1080px) {
-          .hero-card,
-          .contact-grid,
-          .quick-grid {
-            grid-template-columns: 1fr;
-          }
+        .contact-visual-stage {
+          position: relative;
+          width: 100%;
+          min-height: 340px;
+          border-radius: 24px;
+          border: 1px solid rgba(255,255,255,0.08);
+          background:
+            radial-gradient(circle at 75% 18%, rgba(255,179,92,0.18), transparent 22%),
+            rgba(255,255,255,0.03);
+          overflow: hidden;
+          isolation: isolate;
         }
 
         .floating-social {
-  position: absolute;
-  width: 84px;
-  height: 84px;
-  border-radius: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-decoration: none;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 12px 26px rgba(0,0,0,0.20);
-  transition: 0.28s ease;
-  z-index: 2;
-}
+          position: absolute;
+          width: 84px;
+          height: 84px;
+          border-radius: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-decoration: none;
+          background: rgba(255,255,255,0.05);
+          border: 1px solid rgba(255,255,255,0.08);
+          backdrop-filter: blur(12px);
+          box-shadow: 0 12px 26px rgba(0,0,0,0.20);
+          transition: 0.28s ease;
+          z-index: 2;
+        }
 
-.floating-social:hover {
-  transform: translateY(-8px) scale(1.04);
-  background: linear-gradient(135deg, #ffb35c, #ff8c3a);
-  color: #111;
-  border-color: rgba(255,179,92,0.28);
-  box-shadow: 0 20px 40px rgba(255,179,92,0.22);
-}
+        .floating-social:hover {
+          transform: translateY(-8px) scale(1.04);
+          background: linear-gradient(135deg, #ffb35c, #ff8c3a);
+          color: #111;
+          border-color: rgba(255,179,92,0.28);
+          box-shadow: 0 20px 40px rgba(255,179,92,0.22);
+        }
 
-.floating-social-1 {
-  left: 20px;
-  top: 30px;
-  animation: floatY1 3.2s ease-in-out infinite;
-}
+        .floating-social-1 {
+          left: 20px;
+          top: 30px;
+          animation: floatY1 3.2s ease-in-out infinite;
+        }
 
-.floating-social-2 {
-  left: 120px;
-  top: 130px;
-  animation: floatY2 3.8s ease-in-out infinite;
-}
+        .floating-social-2 {
+          left: 110px;
+          top: 115px;
+          animation: floatY2 3.8s ease-in-out infinite;
+        }
 
-.floating-social-3 {
-  right: 20px;
-  top: 140px;
-  animation: floatY3 3.4s ease-in-out infinite;
-}
+        .floating-social-3 {
+          right: 20px;
+          top: 140px;
+          animation: floatY3 3.4s ease-in-out infinite;
+        }
 
-.floating-social-4 {
-  right: 125px;
-  top: 30px;
-  animation: floatY4 4s ease-in-out infinite;
-}
+        .floating-social-4 {
+          right: 118px;
+          top: 42px;
+          animation: floatY4 4s ease-in-out infinite;
+        }
 
-@keyframes floatY1 {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
+        @keyframes floatY1 {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
 
-@keyframes floatY2 {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(12px); }
-}
+        @keyframes floatY2 {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(12px); }
+        }
 
-@keyframes floatY3 {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
-}
+        @keyframes floatY3 {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-12px); }
+        }
 
-@keyframes floatY4 {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(10px); }
-}
+        @keyframes floatY4 {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(10px); }
+        }
 
-.particles-layer {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 120px;
-  pointer-events: none;
-  overflow: hidden;
-}
+        .particles-layer {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 120px;
+          pointer-events: none;
+          overflow: hidden;
+          z-index: 1;
+        }
 
-.particle {
-  position: absolute;
-  bottom: -8px;
-  width: 6px;
-  height: 6px;
-  border-radius: 999px;
-  background: rgba(255,179,92,0.85);
-  box-shadow: 0 0 10px rgba(255,179,92,0.45);
-  animation: emberRise linear infinite;
-  opacity: 0.8;
-}
+        .particle {
+          position: absolute;
+          bottom: -8px;
+          width: 6px;
+          height: 6px;
+          border-radius: 999px;
+          background: rgba(255,179,92,0.85);
+          box-shadow: 0 0 10px rgba(255,179,92,0.45);
+          animation: emberRise linear infinite;
+          opacity: 0.8;
+        }
 
-@keyframes emberRise {
-  0% {
-    transform: translateY(0) scale(0.8);
-    opacity: 0;
-  }
-  15% {
-    opacity: 0.9;
-  }
-  100% {
-    transform: translateY(-120px) scale(1.15);
-    opacity: 0;
-  }
-}
+        @keyframes emberRise {
+          0% {
+            transform: translateY(0) scale(0.8);
+            opacity: 0;
+          }
+          15% {
+            opacity: 0.9;
+          }
+          100% {
+            transform: translateY(-120px) scale(1.15);
+            opacity: 0;
+          }
+        }
 
-.particle-1  { left: 6%;  animation-duration: 3.2s; animation-delay: 0.1s; }
-.particle-2  { left: 12%; animation-duration: 4.1s; animation-delay: 0.8s; }
-.particle-3  { left: 18%; animation-duration: 3.8s; animation-delay: 1.2s; }
-.particle-4  { left: 24%; animation-duration: 4.4s; animation-delay: 0.4s; }
-.particle-5  { left: 30%; animation-duration: 3.5s; animation-delay: 1.5s; }
-.particle-6  { left: 36%; animation-duration: 4.3s; animation-delay: 0.6s; }
-.particle-7  { left: 42%; animation-duration: 3.7s; animation-delay: 1.8s; }
-.particle-8  { left: 48%; animation-duration: 4.6s; animation-delay: 0.9s; }
-.particle-9  { left: 54%; animation-duration: 3.4s; animation-delay: 1.1s; }
-.particle-10 { left: 60%; animation-duration: 4.0s; animation-delay: 0.2s; }
-.particle-11 { left: 66%; animation-duration: 3.9s; animation-delay: 1.4s; }
-.particle-12 { left: 72%; animation-duration: 4.5s; animation-delay: 0.7s; }
-.particle-13 { left: 78%; animation-duration: 3.6s; animation-delay: 1.7s; }
-.particle-14 { left: 84%; animation-duration: 4.2s; animation-delay: 0.5s; }
-.particle-15 { left: 88%; animation-duration: 3.3s; animation-delay: 1.0s; }
-.particle-16 { left: 92%; animation-duration: 4.7s; animation-delay: 0.3s; }
-.particle-17 { left: 96%; animation-duration: 3.8s; animation-delay: 1.3s; }
-.particle-18 { left: 50%; animation-duration: 4.9s; animation-delay: 0.6s; }
+        .particle-1  { left: 6%;  animation-duration: 3.2s; animation-delay: 0.1s; }
+        .particle-2  { left: 12%; animation-duration: 4.1s; animation-delay: 0.8s; }
+        .particle-3  { left: 18%; animation-duration: 3.8s; animation-delay: 1.2s; }
+        .particle-4  { left: 24%; animation-duration: 4.4s; animation-delay: 0.4s; }
+        .particle-5  { left: 30%; animation-duration: 3.5s; animation-delay: 1.5s; }
+        .particle-6  { left: 36%; animation-duration: 4.3s; animation-delay: 0.6s; }
+        .particle-7  { left: 42%; animation-duration: 3.7s; animation-delay: 1.8s; }
+        .particle-8  { left: 48%; animation-duration: 4.6s; animation-delay: 0.9s; }
+        .particle-9  { left: 54%; animation-duration: 3.4s; animation-delay: 1.1s; }
+        .particle-10 { left: 60%; animation-duration: 4.0s; animation-delay: 0.2s; }
+        .particle-11 { left: 66%; animation-duration: 3.9s; animation-delay: 1.4s; }
+        .particle-12 { left: 72%; animation-duration: 4.5s; animation-delay: 0.7s; }
+        .particle-13 { left: 78%; animation-duration: 3.6s; animation-delay: 1.7s; }
+        .particle-14 { left: 84%; animation-duration: 4.2s; animation-delay: 0.5s; }
+        .particle-15 { left: 88%; animation-duration: 3.3s; animation-delay: 1.0s; }
+        .particle-16 { left: 92%; animation-duration: 4.7s; animation-delay: 0.3s; }
+        .particle-17 { left: 96%; animation-duration: 3.8s; animation-delay: 1.3s; }
+        .particle-18 { left: 50%; animation-duration: 4.9s; animation-delay: 0.6s; }
+
+        @media (max-width: 1080px) {
+          .hero-card,
+          .contact-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .hero-left {
+            min-height: auto;
+          }
+
+          .hero-right {
+            padding-top: 0;
+          }
+        }
+
+        @media (max-width: 720px) {
+          .container {
+            width: min(1240px, calc(100% - 20px));
+          }
+
+          .hero-wrap {
+            padding-top: 18px;
+            padding-bottom: 20px;
+          }
+
+          .hero-card {
+            border-radius: 22px;
+            gap: 0;
+          }
+
+          .hero-left {
+            padding: 22px 18px 16px;
+          }
+
+          .hero-right {
+            padding: 0 18px 18px;
+          }
+
+          .hero-visual {
+            padding: 16px;
+            border-radius: 20px;
+          }
+
+          .hero-title {
+            font-size: clamp(34px, 11vw, 54px);
+            line-height: 0.98;
+          }
+
+          .hero-copy,
+          .section-copy {
+            font-size: 14px;
+            line-height: 1.75;
+          }
+
+          .section {
+            padding-top: 26px;
+          }
+
+          .section-title {
+            font-size: clamp(26px, 8vw, 34px);
+            line-height: 1.08;
+          }
+
+          .card {
+            padding: 18px;
+            border-radius: 18px;
+          }
+
+          .contact-item,
+          .social-item {
+            grid-template-columns: 50px 1fr;
+            gap: 12px;
+            padding: 14px;
+            border-radius: 16px;
+          }
+
+          .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+          }
+
+          .cta-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+          }
+
+          .cta-row .btn-primary,
+          .cta-row .btn-secondary {
+            width: 100%;
+          }
+
+          .contact-visual-stage {
+            min-height: 300px;
+            border-radius: 20px;
+          }
+
+          .floating-social {
+            width: 72px;
+            height: 72px;
+            border-radius: 20px;
+          }
+
+          .floating-social-1 {
+            left: 22px;
+            top: 26px;
+          }
+
+          .floating-social-2 {
+            left: 50%;
+            top: 70px;
+            transform: translateX(-50%);
+            animation: floatCenter1 3.6s ease-in-out infinite;
+          }
+
+          .floating-social-3 {
+            right: 24px;
+            top: 126px;
+          }
+
+          .floating-social-4 {
+            right: auto;
+            left: 50%;
+            bottom: 34px;
+            top: auto;
+            transform: translateX(-50%);
+            animation: floatCenter2 3.8s ease-in-out infinite;
+          }
+
+          @keyframes floatCenter1 {
+            0%, 100% { transform: translateX(-50%) translateY(0px); }
+            50% { transform: translateX(-50%) translateY(10px); }
+          }
+
+          @keyframes floatCenter2 {
+            0%, 100% { transform: translateX(-50%) translateY(0px); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+          }
+        }
+
+        @media (max-width: 480px) {
+          .container {
+            width: min(1240px, calc(100% - 16px));
+          }
+
+          .hero-left {
+            padding: 18px 14px 14px;
+          }
+
+          .hero-right {
+            padding: 0 14px 14px;
+          }
+
+          .hero-visual {
+            padding: 14px;
+            border-radius: 18px;
+          }
+
+          .badge {
+            font-size: 11px;
+            padding: 7px 12px;
+          }
+
+          .eyebrow {
+            font-size: 13px;
+            margin-bottom: 10px;
+          }
+
+          .hero-title {
+            font-size: clamp(30px, 11vw, 42px);
+          }
+
+          .hero-copy,
+          .section-copy,
+          .contact-value,
+          .faq-answer {
+            font-size: 13px;
+          }
+
+          .card {
+            padding: 16px;
+          }
+
+          .contact-item,
+          .social-item {
+            grid-template-columns: 1fr;
+            align-items: flex-start;
+          }
+
+          .contact-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+          }
+
+          .contact-label {
+            font-size: 11px;
+          }
+
+          .btn-primary,
+          .btn-secondary {
+            padding: 12px 16px;
+            font-size: 13px;
+          }
+
+          .faq-item {
+            padding: 14px;
+            border-radius: 16px;
+          }
+
+          .contact-visual-stage {
+            min-height: 270px;
+            border-radius: 18px;
+          }
+
+          .floating-social {
+            width: 62px;
+            height: 62px;
+            border-radius: 18px;
+          }
+
+          .floating-social-1 {
+            left: 14px;
+            top: 18px;
+          }
+
+          .floating-social-2 {
+            left: 50%;
+            top: 52px;
+            transform: translateX(-50%);
+          }
+
+          .floating-social-3 {
+            right: 14px;
+            top: 108px;
+          }
+
+          .floating-social-4 {
+            left: 50%;
+            bottom: 24px;
+            transform: translateX(-50%);
+          }
+
+          .particles-layer {
+            height: 88px;
+          }
+
+          .particle {
+            width: 5px;
+            height: 5px;
+          }
+        }
       `}</style>
 
       <section className="hero-wrap">
@@ -533,83 +770,67 @@ export default function Contact() {
 
             <div className="hero-right">
               <div className="hero-visual">
-                <div
-  style={{
-    position: "relative",
-    width: "100%",
-    minHeight: 340,
-    borderRadius: 24,
-    border: "1px solid rgba(255,255,255,0.08)",
-    background:
-      "radial-gradient(circle at 75% 18%, rgba(255,179,92,0.18), transparent 22%), rgba(255,255,255,0.03)",
-    overflow: "hidden",
-  }}
->
-  {/* floating icons */}
-  <a
-    href={instagram}
-    target="_blank"
-    rel="noreferrer"
-    className="floating-social floating-social-1"
-    title="Instagram"
-  >
-    <FaInstagram size={28} color="#E4405F" />
-  </a>
+                <div className="contact-visual-stage">
+                  <a
+                    href={instagram}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="floating-social floating-social-1"
+                    title="Instagram"
+                  >
+                    <FaInstagram size={28} color="#E4405F" />
+                  </a>
 
-  <a
-    href={linkedin}
-    target="_blank"
-    rel="noreferrer"
-    className="floating-social floating-social-2"
-    title="LinkedIn"
-  >
-    <FaLinkedinIn size={28} color="#0A66C2" />
-  </a>
+                  <a
+                    href={linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="floating-social floating-social-2"
+                    title="LinkedIn"
+                  >
+                    <FaLinkedinIn size={28} color="#0A66C2" />
+                  </a>
 
-  <a
-    href={xUrl}
-    target="_blank"
-    rel="noreferrer"
-    className="floating-social floating-social-3"
-    title="X"
-  >
-    <FaXTwitter size={28} color="#ffffff" />
-  </a>
+                  <a
+                    href={xUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="floating-social floating-social-3"
+                    title="X"
+                  >
+                    <FaXTwitter size={28} color="#ffffff" />
+                  </a>
 
-  <a
-    href={whatsappLink}
-    target="_blank"
-    rel="noreferrer"
-    className="floating-social floating-social-4"
-    title="WhatsApp"
-  >
-    <FaWhatsapp size={28} color="#25D366" />
-  </a>
+                  <a
+                    href={whatsappLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="floating-social floating-social-4"
+                    title="WhatsApp"
+                  >
+                    <FaWhatsapp size={28} color="#25D366" />
+                  </a>
 
-  {/* bottom particles */}
-  <div className="particles-layer">
-    {Array.from({ length: 18 }).map((_, i) => (
-      <span
-        key={i}
-        className={`particle particle-${i + 1}`}
-      />
-    ))}
-  </div>
+                  <div className="particles-layer">
+                    {Array.from({ length: 18 }).map((_, i) => (
+                      <span key={i} className={`particle particle-${i + 1}`} />
+                    ))}
+                  </div>
 
-  {/* soft glow */}
-  <div
-    style={{
-      position: "absolute",
-      width: 240,
-      height: 240,
-      right: -30,
-      top: -20,
-      background: "rgba(255,179,92,0.16)",
-      filter: "blur(90px)",
-      pointerEvents: "none",
-    }}
-  />
-</div>
+                  <div
+                    style={{
+                      position: "absolute",
+                      width: 240,
+                      height: 240,
+                      right: -30,
+                      top: -20,
+                      background: "rgba(255,179,92,0.16)",
+                      filter: "blur(90px)",
+                      pointerEvents: "none",
+                      zIndex: 0,
+                    }}
+                  />
+                </div>
               </div>
             </div>
           </div>

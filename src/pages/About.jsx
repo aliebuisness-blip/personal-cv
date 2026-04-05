@@ -6,6 +6,10 @@ export default function About() {
           box-sizing: border-box;
         }
 
+        html, body {
+          overflow-x: hidden;
+        }
+
         .container {
           width: min(1240px, calc(100% - 32px));
           margin: 0 auto;
@@ -18,7 +22,7 @@ export default function About() {
 
         .hero-card {
           display: grid;
-          grid-template-columns: 1.1fr 0.9fr;
+          grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
           gap: 22px;
           border-radius: 30px;
           overflow: hidden;
@@ -35,6 +39,7 @@ export default function About() {
           flex-direction: column;
           justify-content: center;
           min-height: 420px;
+          min-width: 0;
         }
 
         .hero-right {
@@ -42,6 +47,7 @@ export default function About() {
           display: flex;
           align-items: stretch;
           justify-content: center;
+          min-width: 0;
         }
 
         .hero-visual {
@@ -55,22 +61,7 @@ export default function About() {
           display: grid;
           gap: 14px;
           padding: 22px;
-        }
-
-        .visual-box {
-          border-radius: 18px;
-          border: 1px solid rgba(255,255,255,0.08);
-          background: rgba(255,255,255,0.03);
-        }
-
-        .visual-box.large {
-          min-height: 180px;
-        }
-
-        .visual-row {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 14px;
+          min-width: 0;
         }
 
         .badge-row {
@@ -87,6 +78,8 @@ export default function About() {
           background: rgba(255,255,255,0.04);
           color: rgba(255,255,255,0.78);
           font-size: 12px;
+          max-width: 100%;
+          word-break: break-word;
         }
 
         .badge.accent {
@@ -107,6 +100,7 @@ export default function About() {
           font-size: clamp(42px, 7vw, 78px);
           line-height: 0.96;
           letter-spacing: -0.07em;
+          overflow-wrap: anywhere;
         }
 
         .hero-copy {
@@ -146,7 +140,7 @@ export default function About() {
 
         .story-grid {
           display: grid;
-          grid-template-columns: 1.2fr 0.8fr;
+          grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
           gap: 20px;
           margin-top: 24px;
         }
@@ -157,6 +151,7 @@ export default function About() {
           border-radius: 24px;
           padding: 28px;
           transition: 0.28s ease;
+          min-width: 0;
         }
 
         .card:hover,
@@ -170,7 +165,7 @@ export default function About() {
 
         .pillars-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(3, minmax(0, 1fr));
           gap: 20px;
           margin-top: 24px;
         }
@@ -181,6 +176,7 @@ export default function About() {
           border-radius: 24px;
           padding: 24px;
           transition: 0.28s ease;
+          min-width: 0;
         }
 
         .pillar-number {
@@ -203,6 +199,7 @@ export default function About() {
           font-size: 28px;
           line-height: 1.08;
           letter-spacing: -0.04em;
+          overflow-wrap: anywhere;
         }
 
         .pillar-copy {
@@ -214,7 +211,7 @@ export default function About() {
 
         .approach-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(3, minmax(0, 1fr));
           gap: 20px;
           margin-top: 24px;
         }
@@ -225,6 +222,7 @@ export default function About() {
           border-radius: 24px;
           padding: 24px;
           transition: 0.28s ease;
+          min-width: 0;
         }
 
         .approach-badge {
@@ -244,7 +242,7 @@ export default function About() {
 
         .stats-row {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(4, minmax(0, 1fr));
           gap: 16px;
           margin-top: 24px;
         }
@@ -255,6 +253,7 @@ export default function About() {
           border-radius: 20px;
           padding: 20px;
           transition: 0.28s ease;
+          min-width: 0;
         }
 
         .stat-value {
@@ -262,6 +261,7 @@ export default function About() {
           font-weight: 700;
           letter-spacing: -0.06em;
           margin-bottom: 6px;
+          overflow-wrap: anywhere;
         }
 
         .stat-label {
@@ -284,6 +284,7 @@ export default function About() {
           color: rgba(255,255,255,0.76);
           font-size: 14px;
           line-height: 1.75;
+          overflow-wrap: anywhere;
         }
 
         @media (max-width: 1080px) {
@@ -293,6 +294,156 @@ export default function About() {
           .approach-grid,
           .stats-row {
             grid-template-columns: 1fr;
+          }
+
+          .hero-left {
+            min-height: auto;
+          }
+
+          .hero-right {
+            padding-top: 0;
+          }
+        }
+
+        @media (max-width: 720px) {
+          .container {
+            width: min(1240px, calc(100% - 20px));
+          }
+
+          .hero-wrap {
+            padding-top: 18px;
+            padding-bottom: 20px;
+          }
+
+          .hero-card {
+            border-radius: 22px;
+            gap: 0;
+          }
+
+          .hero-left {
+            padding: 22px 18px 16px;
+          }
+
+          .hero-right {
+            padding: 0 18px 18px;
+          }
+
+          .hero-visual {
+            padding: 16px;
+            border-radius: 20px;
+          }
+
+          .hero-title {
+            font-size: clamp(34px, 11vw, 54px);
+            line-height: 0.98;
+          }
+
+          .hero-copy,
+          .section-copy,
+          .pillar-copy {
+            font-size: 14px;
+            line-height: 1.75;
+          }
+
+          .section {
+            padding-top: 26px;
+          }
+
+          .section-title {
+            font-size: clamp(26px, 8vw, 34px);
+            line-height: 1.08;
+          }
+
+          .card,
+          .pillar-card,
+          .approach-card,
+          .stat-card {
+            padding: 18px;
+            border-radius: 18px;
+          }
+
+          .pillar-title {
+            font-size: 22px;
+          }
+
+          .stats-row,
+          .story-grid,
+          .pillars-grid,
+          .approach-grid {
+            gap: 16px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .container {
+            width: min(1240px, calc(100% - 16px));
+          }
+
+          .hero-left {
+            padding: 18px 14px 14px;
+          }
+
+          .hero-right {
+            padding: 0 14px 14px;
+          }
+
+          .hero-visual {
+            padding: 14px;
+            border-radius: 18px;
+          }
+
+          .badge {
+            font-size: 11px;
+            padding: 7px 12px;
+          }
+
+          .eyebrow {
+            font-size: 13px;
+            margin-bottom: 10px;
+          }
+
+          .hero-title {
+            font-size: clamp(30px, 11vw, 42px);
+          }
+
+          .hero-copy,
+          .section-copy,
+          .pillar-copy,
+          .check-item,
+          .stat-label {
+            font-size: 13px;
+          }
+
+          .card,
+          .pillar-card,
+          .approach-card,
+          .stat-card {
+            padding: 16px;
+          }
+
+          .pillar-title {
+            font-size: 20px;
+          }
+
+          .pillar-number {
+            width: 38px;
+            height: 38px;
+            margin-bottom: 14px;
+          }
+
+          .approach-badge {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+          }
+
+          .check-item {
+            padding: 12px 14px;
+            border-radius: 16px;
+          }
+
+          .stat-value {
+            font-size: 28px;
           }
         }
       `}</style>
@@ -324,85 +475,87 @@ export default function About() {
 
             <div className="hero-right">
               <div className="hero-visual">
-<div
-  style={{
-    display: "grid",
-    gap: 14,
-    width: "100%",
-    minHeight: "100%",
-  }}
->
-  <div
-    style={{
-      borderRadius: 24,
-      overflow: "hidden",
-      border: "1px solid rgba(255,255,255,0.08)",
-      minHeight: 360,
-      position: "relative",
-      background: "rgba(255,255,255,0.03)",
-    }}
-  >
-    <img
-      src="/MyPic.jpeg"
-      alt="Ali Abdullah"
-      style={{
-        width: "100%",
-        height: "100%",
-        objectFit: "cover",
-        display: "block",
-      }}
-    />
-    <div
-      style={{
-        position: "absolute",
-        inset: 0,
-        background: "linear-gradient(to top, rgba(0,0,0,0.32), rgba(0,0,0,0.02))",
-      }}
-    />
-  </div>
+                <div
+                  style={{
+                    display: "grid",
+                    gap: 14,
+                    width: "100%",
+                    minHeight: "100%",
+                  }}
+                >
+                  <div
+                    style={{
+                      borderRadius: 24,
+                      overflow: "hidden",
+                      border: "1px solid rgba(255,255,255,0.08)",
+                      minHeight: "clamp(260px, 52vw, 360px)",
+                      position: "relative",
+                      background: "rgba(255,255,255,0.03)",
+                    }}
+                  >
+                    <img
+                      src="/MyPic.jpeg"
+                      alt="Ali Abdullah"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        objectPosition: "center top",
+                        display: "block",
+                      }}
+                    />
+                    <div
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        background:
+                          "linear-gradient(to top, rgba(0,0,0,0.32), rgba(0,0,0,0.02))",
+                      }}
+                    />
+                  </div>
 
-  <div
-    style={{
-      borderRadius: 20,
-      border: "1px solid rgba(255,255,255,0.08)",
-      background: "rgba(255,255,255,0.03)",
-      padding: 18,
-      display: "grid",
-      gap: 12,
-    }}
-  >
-    <div
-      style={{
-        color: "rgba(255,255,255,0.45)",
-        fontSize: 12,
-        textTransform: "uppercase",
-        letterSpacing: "0.14em",
-      }}
-    >
-      Personal Note
-    </div>
+                  <div
+                    style={{
+                      borderRadius: 20,
+                      border: "1px solid rgba(255,255,255,0.08)",
+                      background: "rgba(255,255,255,0.03)",
+                      padding: 18,
+                      display: "grid",
+                      gap: 12,
+                    }}
+                  >
+                    <div
+                      style={{
+                        color: "rgba(255,255,255,0.45)",
+                        fontSize: 12,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.14em",
+                      }}
+                    >
+                      Personal Note
+                    </div>
 
-    <div
-      style={{
-        fontSize: 20,
-        fontWeight: 700,
-        lineHeight: 1.35,
-      }}
-    >
-      I care about how things feel before I care about how they flex.
-    </div>
+                    <div
+                      style={{
+                        fontSize: "clamp(18px, 4vw, 20px)",
+                        fontWeight: 700,
+                        lineHeight: 1.35,
+                      }}
+                    >
+                      I care about how things feel before I care about how they flex.
+                    </div>
 
-    <div
-      style={{
-        color: "rgba(255,255,255,0.62)",
-        fontSize: 14,
-        lineHeight: 1.8,
-      }}
-    >
-      Clean thinking. Better visuals. Stronger presentation.
-    </div>
-  </div>
-</div>
+                    <div
+                      style={{
+                        color: "rgba(255,255,255,0.62)",
+                        fontSize: 14,
+                        lineHeight: 1.8,
+                      }}
+                    >
+                      Clean thinking. Better visuals. Stronger presentation.
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

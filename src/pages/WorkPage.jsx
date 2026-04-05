@@ -662,64 +662,104 @@ export default function WorkPage() {
   return (
     <div>
       <style>{`
-        * { box-sizing: border-box; }
+  * { box-sizing: border-box; }
 
-        .container {
-          width: min(1240px, calc(100% - 32px));
-          margin: 0 auto;
-        }
+  html, body {
+    overflow-x: hidden;
+  }
 
-        .category-section {
-          margin-top: 34px;
-        }
+  .container {
+    width: min(1240px, calc(100% - 32px));
+    margin: 0 auto;
+  }
 
-        .project-card {
-          background: #11161f;
-          border: 1px solid rgba(255,255,255,0.08);
-          border-radius: 24px;
-          overflow: hidden;
-          transition: 0.28s ease;
-          cursor: pointer;
-        }
+  .category-section {
+    margin-top: 34px;
+  }
 
-        .project-card:hover {
-          transform: translateY(-6px);
-          border-color: rgba(255,255,255,0.16);
-          box-shadow: 0 20px 40px rgba(0,0,0,0.28);
-        }
+  .project-card {
+    background: #11161f;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: 0.28s ease;
+    cursor: pointer;
+    min-width: 0;
+  }
 
-        .project-image {
-          width: 100%;
-          height: 280px;
-          object-fit: cover;
-          display: block;
-          background: #0d1219;
-          transition: transform 0.35s ease;
-        }
+  .project-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255,255,255,0.16);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.28);
+  }
 
-        .project-card:hover .project-image {
-          transform: scale(1.04);
-        }
+  .project-image {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    background: #0d1219;
+    transition: transform 0.35s ease;
+  }
 
-        .projects-row::-webkit-scrollbar {
-          height: 8px;
-        }
+  .project-card:hover .project-image {
+    transform: scale(1.04);
+  }
 
-        .projects-row::-webkit-scrollbar-track {
-          background: rgba(255,255,255,0.04);
-          border-radius: 999px;
-        }
+  .projects-row::-webkit-scrollbar {
+    height: 6px;
+  }
 
-        .projects-row::-webkit-scrollbar-thumb {
-          background: rgba(255,255,255,0.14);
-          border-radius: 999px;
-        }
+  .projects-row::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.04);
+    border-radius: 999px;
+  }
 
-        .projects-row {
-          scrollbar-width: thin;
-          scrollbar-color: rgba(255,255,255,0.14) rgba(255,255,255,0.04);
-        }
-      `}</style>
+  .projects-row::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.14);
+    border-radius: 999px;
+  }
+
+  .projects-row {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.14) rgba(255,255,255,0.04);
+  }
+
+  /* 🔥 MOBILE FIXES */
+
+  @media (max-width: 900px) {
+    .container {
+      width: min(1240px, calc(100% - 20px));
+    }
+
+    .project-card {
+      border-radius: 18px;
+    }
+
+    .project-image {
+      height: 240px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      width: min(1240px, calc(100% - 16px));
+    }
+
+    .category-section {
+      margin-top: 26px;
+    }
+
+    .project-image {
+      height: 200px;
+    }
+
+    .project-card {
+      border-radius: 16px;
+    }
+  }
+`}</style>
 
       <header
         style={{

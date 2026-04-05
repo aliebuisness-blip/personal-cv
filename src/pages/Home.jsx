@@ -31,10 +31,7 @@ export default function Home() {
             .order("sort_order", { ascending: true })
             .limit(6),
 
-          supabase
-            .from("profile_settings")
-            .select("*")
-            .limit(1)
+          supabase.from("profile_settings").select("*").limit(1),
         ]);
 
         if (projectsError) console.error(projectsError);
@@ -55,10 +52,21 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div className="home-page">
       <style>{`
         * {
           box-sizing: border-box;
+        }
+
+        html, body {
+          margin: 0;
+          padding: 0;
+          overflow-x: hidden;
+        }
+
+        .home-page {
+          width: 100%;
+          overflow-x: hidden;
         }
 
         .container {
@@ -67,55 +75,57 @@ export default function Home() {
         }
 
         .hero-shell {
-          padding-top: 34px;
-          padding-bottom: 34px;
+          padding-top: 24px;
+          padding-bottom: 28px;
         }
 
         .hero-card {
           display: grid;
-          grid-template-columns: 1.1fr 0.9fr;
+          grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
           gap: 24px;
           min-height: 620px;
-          border-radius: 32px;
+          border-radius: 30px;
           overflow: hidden;
           border: 1px solid rgba(255,255,255,0.08);
           background:
-            radial-gradient(circle at 72% 35%, rgba(255,143,41,0.35), transparent 20%),
+            radial-gradient(circle at 72% 35%, rgba(255,143,41,0.28), transparent 22%),
             linear-gradient(135deg, #111111 0%, #171717 45%, #111111 100%);
           box-shadow: 0 24px 60px rgba(0,0,0,0.35);
         }
 
         .hero-left {
-          padding: 48px;
+          padding: 42px;
           display: flex;
           flex-direction: column;
           justify-content: center;
+          min-width: 0;
         }
 
         .hero-right {
           position: relative;
           min-height: 100%;
           overflow: hidden;
+          min-width: 0;
         }
 
         .hero-image-wrap {
           position: absolute;
           inset: 0;
           display: flex;
-          align-items: end;
+          align-items: stretch;
           justify-content: center;
-          padding: 28px;
+          padding: 24px 24px 24px 0;
         }
 
         .hero-portrait-frame {
           width: 100%;
           height: 100%;
-          border-radius: 28px;
+          border-radius: 26px;
           overflow: hidden;
           position: relative;
           border: 1px solid rgba(255,255,255,0.08);
           background:
-            radial-gradient(circle at 60% 30%, rgba(255,149,56,0.55), transparent 22%),
+            radial-gradient(circle at 60% 30%, rgba(255,149,56,0.40), transparent 24%),
             linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
         }
 
@@ -123,21 +133,23 @@ export default function Home() {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          object-position: center top;
           display: block;
-          filter: saturate(0.95) contrast(1.02);
+          filter: saturate(0.96) contrast(1.02);
         }
 
         .hero-portrait-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to top, rgba(8,8,8,0.78), rgba(8,8,8,0.08));
+          background: linear-gradient(to top, rgba(8,8,8,0.68), rgba(8,8,8,0.08));
+          pointer-events: none;
         }
 
         .hero-meta {
           display: flex;
           flex-wrap: wrap;
           gap: 10px;
-          margin-bottom: 22px;
+          margin-bottom: 20px;
         }
 
         .hero-badge {
@@ -150,6 +162,8 @@ export default function Home() {
           background: rgba(255,255,255,0.04);
           color: rgba(255,255,255,0.78);
           font-size: 12px;
+          max-width: 100%;
+          word-break: break-word;
         }
 
         .hero-badge.accent {
@@ -168,17 +182,18 @@ export default function Home() {
 
         .hero-title {
           margin: 0;
-          font-size: clamp(52px, 8vw, 92px);
+          font-size: clamp(50px, 7.5vw, 92px);
           line-height: 0.92;
           letter-spacing: -0.08em;
           color: #ffffff;
+          overflow-wrap: anywhere;
         }
 
         .hero-role {
-          margin: 20px 0 14px 0;
+          margin: 18px 0 14px 0;
           font-size: 24px;
-          line-height: 1.4;
-          color: rgba(255,255,255,0.82);
+          line-height: 1.45;
+          color: rgba(255,255,255,0.84);
           max-width: 760px;
         }
 
@@ -193,10 +208,14 @@ export default function Home() {
         .hero-contact-row {
           display: flex;
           flex-wrap: wrap;
-          gap: 18px;
+          gap: 12px 18px;
           margin-top: 22px;
           color: rgba(255,255,255,0.78);
           font-size: 14px;
+        }
+
+        .hero-contact-row span {
+          overflow-wrap: anywhere;
         }
 
         .hero-actions {
@@ -206,15 +225,22 @@ export default function Home() {
           margin-top: 28px;
         }
 
-        .btn-primary {
+        .btn-primary,
+        .btn-secondary {
           display: inline-flex;
           align-items: center;
           justify-content: center;
+          text-align: center;
+          min-height: 48px;
+          line-height: 1.2;
+          text-decoration: none;
+        }
+
+        .btn-primary {
           padding: 13px 18px;
           border-radius: 999px;
-          background: #ffb35c;
+          background: #f6ae57;
           color: #101010;
-          text-decoration: none;
           font-weight: 700;
           font-size: 14px;
           transition: 0.22s ease;
@@ -226,15 +252,11 @@ export default function Home() {
         }
 
         .btn-secondary {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
           padding: 13px 18px;
           border-radius: 999px;
           border: 1px solid rgba(255,255,255,0.10);
           background: rgba(255,255,255,0.04);
           color: white;
-          text-decoration: none;
           font-weight: 600;
           font-size: 14px;
           transition: 0.22s ease;
@@ -248,22 +270,24 @@ export default function Home() {
         .stats-row {
           margin-top: 24px;
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(4, minmax(0, 1fr));
           gap: 16px;
         }
 
         .stat-card {
-          background: #11161f;
+          background: #09121f;
           border: 1px solid rgba(255,255,255,0.08);
           border-radius: 22px;
           padding: 20px;
           transition: 0.28s ease;
+          min-width: 0;
         }
 
         .stat-card:hover,
         .service-card:hover,
         .about-card:hover,
-        .contact-card:hover {
+        .contact-card:hover,
+        .project-card:hover {
           transform: translateY(-6px);
           border-color: rgba(255,255,255,0.16);
           box-shadow: 0 20px 40px rgba(0,0,0,0.24);
@@ -274,6 +298,7 @@ export default function Home() {
           font-weight: 700;
           letter-spacing: -0.06em;
           margin-bottom: 6px;
+          overflow-wrap: anywhere;
         }
 
         .stat-label {
@@ -312,7 +337,7 @@ export default function Home() {
 
         .projects-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(3, minmax(0, 1fr));
           gap: 20px;
           margin-top: 24px;
         }
@@ -323,12 +348,7 @@ export default function Home() {
           border-radius: 24px;
           overflow: hidden;
           transition: 0.28s ease;
-        }
-
-        .project-card:hover {
-          transform: translateY(-6px);
-          border-color: rgba(255,255,255,0.16);
-          box-shadow: 0 20px 40px rgba(0,0,0,0.28);
+          min-width: 0;
         }
 
         .project-image-wrap {
@@ -341,6 +361,7 @@ export default function Home() {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          object-position: center top;
           display: block;
           background: #0d1219;
           transition: transform 0.35s ease;
@@ -354,6 +375,7 @@ export default function Home() {
           position: absolute;
           inset: 0;
           background: linear-gradient(to top, rgba(10,10,10,0.82), rgba(10,10,10,0.10));
+          pointer-events: none;
         }
 
         .project-content {
@@ -374,6 +396,8 @@ export default function Home() {
           border: 1px solid rgba(255,255,255,0.10);
           font-size: 12px;
           color: rgba(255,255,255,0.76);
+          max-width: 100%;
+          word-break: break-word;
         }
 
         .tag.accent {
@@ -386,6 +410,7 @@ export default function Home() {
           margin: 0 0 10px 0;
           font-size: 24px;
           letter-spacing: -0.03em;
+          overflow-wrap: anywhere;
         }
 
         .project-copy {
@@ -397,7 +422,7 @@ export default function Home() {
 
         .services-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(3, minmax(0, 1fr));
           gap: 20px;
           margin-top: 24px;
         }
@@ -408,6 +433,7 @@ export default function Home() {
           border-radius: 24px;
           padding: 24px;
           transition: 0.28s ease;
+          min-width: 0;
         }
 
         .service-number {
@@ -421,6 +447,7 @@ export default function Home() {
           margin: 0 0 10px 0;
           font-size: 24px;
           letter-spacing: -0.03em;
+          overflow-wrap: anywhere;
         }
 
         .service-copy {
@@ -432,7 +459,7 @@ export default function Home() {
 
         .bottom-grid {
           display: grid;
-          grid-template-columns: 1.2fr 1fr;
+          grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
           gap: 20px;
           margin-top: 24px;
         }
@@ -444,6 +471,7 @@ export default function Home() {
           border-radius: 24px;
           padding: 28px;
           transition: 0.28s ease;
+          min-width: 0;
         }
 
         .contact-list {
@@ -459,29 +487,250 @@ export default function Home() {
           background: rgba(255,255,255,0.04);
           color: rgba(255,255,255,0.78);
           font-size: 14px;
+          overflow-wrap: anywhere;
         }
 
         @media (max-width: 1100px) {
-          .hero-card,
+          .hero-card {
+            grid-template-columns: 1fr;
+            min-height: auto;
+          }
+
+          .hero-left {
+            padding-bottom: 18px;
+          }
+
+          .hero-right {
+            min-height: 430px;
+          }
+
+          .hero-image-wrap {
+            position: relative;
+            inset: auto;
+            padding: 0 24px 24px 24px;
+            height: 100%;
+          }
+
           .projects-grid,
-          .services-grid,
+          .services-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+
           .bottom-grid,
           .stats-row {
             grid-template-columns: 1fr;
           }
-
-          .hero-right {
-            min-height: 420px;
-          }
         }
 
         @media (max-width: 720px) {
-          .hero-left {
-            padding: 28px;
+          .container {
+            width: min(1240px, calc(100% - 20px));
+          }
+
+          .hero-shell {
+            padding-top: 18px;
+            padding-bottom: 22px;
           }
 
           .hero-card {
+            border-radius: 22px;
+            gap: 0;
+          }
+
+          .hero-left {
+            padding: 20px 18px 16px;
+          }
+
+          .hero-right {
             min-height: auto;
+          }
+
+          .hero-image-wrap {
+            padding: 0 18px 18px 18px;
+          }
+
+          .hero-portrait-frame {
+            height: 360px;
+            border-radius: 20px;
+          }
+
+          .hero-title {
+            font-size: clamp(42px, 14vw, 60px);
+            line-height: 0.96;
+            letter-spacing: -0.07em;
+          }
+
+          .hero-role {
+            font-size: 18px;
+            line-height: 1.5;
+            margin: 16px 0 12px 0;
+          }
+
+          .hero-copy {
+            font-size: 14px;
+            line-height: 1.75;
+          }
+
+          .hero-contact-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+          }
+
+          .hero-actions {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-top: 22px;
+          }
+
+          .hero-actions .btn-primary,
+          .hero-actions .btn-secondary {
+            width: 100%;
+          }
+
+          .stats-row {
+            gap: 12px;
+            margin-top: 18px;
+          }
+
+          .stat-card,
+          .project-card,
+          .service-card,
+          .about-card,
+          .contact-card {
+            border-radius: 18px;
+          }
+
+          .stat-card {
+            padding: 18px;
+          }
+
+          .stat-value {
+            font-size: 28px;
+          }
+
+          .section {
+            padding-top: 26px;
+          }
+
+          .section-title {
+            font-size: clamp(26px, 9vw, 34px);
+            line-height: 1.08;
+          }
+
+          .section-text {
+            font-size: 14px;
+            line-height: 1.75;
+          }
+
+          .projects-grid,
+          .services-grid,
+          .bottom-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-top: 18px;
+          }
+
+          .project-image-wrap {
+            height: 220px;
+          }
+
+          .project-content,
+          .service-card {
+            padding: 18px;
+          }
+
+          .project-title,
+          .service-title {
+            font-size: 20px;
+          }
+
+          .about-card,
+          .contact-card {
+            padding: 20px 18px;
+          }
+
+          .contact-list {
+            gap: 10px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .container {
+            width: min(1240px, calc(100% - 16px));
+          }
+
+          .hero-left {
+            padding: 18px 14px 14px;
+          }
+
+          .hero-image-wrap {
+            padding: 0 14px 14px 14px;
+          }
+
+          .hero-portrait-frame {
+            height: 300px;
+          }
+
+          .hero-meta {
+            gap: 8px;
+            margin-bottom: 18px;
+          }
+
+          .hero-badge {
+            font-size: 11px;
+            padding: 7px 12px;
+          }
+
+          .eyebrow {
+            font-size: 13px;
+            margin-bottom: 10px;
+          }
+
+          .hero-title {
+            font-size: clamp(36px, 13vw, 50px);
+          }
+
+          .hero-role {
+            font-size: 16px;
+          }
+
+          .hero-copy,
+          .section-text,
+          .project-copy,
+          .service-copy,
+          .stat-label,
+          .contact-pill {
+            font-size: 13px;
+          }
+
+          .btn-primary,
+          .btn-secondary {
+            padding: 12px 16px;
+            font-size: 13px;
+          }
+
+          .project-image-wrap {
+            height: 200px;
+          }
+
+          .project-content,
+          .service-card,
+          .about-card,
+          .contact-card,
+          .stat-card {
+            padding: 16px;
+          }
+
+          .project-title,
+          .service-title {
+            font-size: 18px;
+          }
+
+          .section-label {
+            font-size: 11px;
+            letter-spacing: 0.14em;
           }
         }
       `}</style>
@@ -510,7 +759,7 @@ export default function Home() {
 
               <p className="hero-copy">
                 {profile?.hero_description ||
-                  "Most websites look fine. Very few feel right. I fix the structure, the spacing, and the way your product presents itself so people actually take it seriously."}
+                  "Most websites look fine. Very few feel right. I fix structure, spacing and how your product presents itself so people actually take it seriously."}
               </p>
 
               <div className="hero-contact-row">
@@ -523,9 +772,11 @@ export default function Home() {
                 <Link to="/work" className="btn-primary">
                   View Work
                 </Link>
+
                 <Link to="/contact" className="btn-secondary">
                   Let’s Talk
                 </Link>
+
                 <a
                   href={profile?.cv_url || "#"}
                   className="btn-secondary"
@@ -555,6 +806,8 @@ export default function Home() {
                         justifyContent: "center",
                         color: "rgba(255,255,255,0.30)",
                         fontSize: 16,
+                        padding: "20px",
+                        textAlign: "center",
                         background:
                           "radial-gradient(circle at 70% 30%, rgba(255,149,56,0.55), transparent 20%), #151515",
                       }}
@@ -571,22 +824,30 @@ export default function Home() {
           <div className="stats-row">
             <div className="stat-card">
               <div className="stat-value">Design</div>
-              <div className="stat-label">UI/UX, branding, interfaces, websites, visual structure.</div>
+              <div className="stat-label">
+                UI/UX, branding, interfaces, websites, visual structure.
+              </div>
             </div>
 
             <div className="stat-card">
               <div className="stat-value">Build</div>
-              <div className="stat-label">Frontend execution, digital systems, and product presentation.</div>
+              <div className="stat-label">
+                Frontend execution, digital systems, and product presentation.
+              </div>
             </div>
 
             <div className="stat-card">
               <div className="stat-value">{featuredProjects.length}+</div>
-              <div className="stat-label">Featured projects currently shown from Supabase.</div>
+              <div className="stat-label">
+                Featured projects currently shown from Supabase.
+              </div>
             </div>
 
             <div className="stat-card">
               <div className="stat-value">Focus</div>
-              <div className="stat-label">Clean dark premium websites with stronger hierarchy and feel.</div>
+              <div className="stat-label">
+                Clean dark premium websites with stronger hierarchy and feel.
+              </div>
             </div>
           </div>
         </div>
@@ -597,7 +858,8 @@ export default function Home() {
           <div className="section-label">Featured Work</div>
           <h2 className="section-title">Selected projects</h2>
           <p className="section-text">
-            A curated selection of featured projects pulled directly from your database.
+            A curated selection of featured projects pulled directly from your
+            database.
           </p>
 
           {loading ? (
@@ -638,14 +900,19 @@ export default function Home() {
 
                   <div className="project-content">
                     <div className="project-tags">
-                      <span className="tag accent">{project.category}</span>
-                      {project.year ? <span className="tag">{project.year}</span> : null}
+                      {project.category ? (
+                        <span className="tag accent">{project.category}</span>
+                      ) : null}
+                      {project.year ? (
+                        <span className="tag">{project.year}</span>
+                      ) : null}
                     </div>
 
                     <h3 className="project-title">{project.title}</h3>
 
                     <p className="project-copy">
-                      {project.short_description || "No short description added yet."}
+                      {project.short_description ||
+                        "No short description added yet."}
                     </p>
                   </div>
                 </div>
@@ -658,45 +925,49 @@ export default function Home() {
           <div className="section-label">Services</div>
           <h2 className="section-title">What I can help with</h2>
           <p className="section-text">
-            Most digital work feels off — bad spacing, weak hierarchy, messy layout.  
-This is where I step in.
+            Most digital work feels off — bad spacing, weak hierarchy, messy
+            layout. This is where I step in.
           </p>
 
-          <div className="services-grid">
-            {services.length === 0 ? (
-              <p style={{ color: "rgba(255,255,255,0.68)" }}>No services found yet.</p>
-            ) : (
-              services.map((service, index) => (
+          {services.length === 0 ? (
+            <p style={{ color: "rgba(255,255,255,0.68)", marginTop: 24 }}>
+              No services found yet.
+            </p>
+          ) : (
+            <div className="services-grid">
+              {services.map((service, index) => (
                 <div key={service.id} className="service-card">
                   <div className="service-number">
                     {String(index + 1).padStart(2, "0")}
                   </div>
 
                   <h3 className="service-title">{service.title}</h3>
-
                   <p className="service-copy">{service.description}</p>
                 </div>
-              ))
-            )}
-          </div>
+              ))}
+            </div>
+          )}
         </section>
 
         <section className="section">
           <div className="bottom-grid">
             <div className="about-card">
               <div className="section-label">About</div>
-              <h2 className="section-title" style={{ fontSize: "clamp(28px, 4vw, 42px)" }}>
+              <h2
+                className="section-title"
+                style={{ fontSize: "clamp(28px, 4vw, 42px)" }}
+              >
                 More than just a portfolio
               </h2>
 
               <p className="section-text" style={{ marginBottom: 14 }}>
                 {profile?.about_text ||
-                  "I don’t like messy work.Not messy layouts, not messy spacing, not messy thinking. Most products don’t fail because of bad ideas, they fail because they look unfinished."}
+                  "I don’t like messy work. Not messy layouts, not messy spacing, not messy thinking. Most products don’t fail because of bad ideas, they fail because they look unfinished."}
               </p>
 
               <p className="section-text" style={{ marginBottom: 18 }}>
-                This site isn’t just a portfolio.
-                It’s how I present work the way it should be presented.
+                This site isn’t just a portfolio. It’s how I present work the
+                way it should be presented.
               </p>
 
               <Link to="/about" className="btn-secondary">
@@ -706,15 +977,23 @@ This is where I step in.
 
             <div className="contact-card">
               <div className="section-label">Contact</div>
-              <h2 className="section-title" style={{ fontSize: "clamp(28px, 4vw, 42px)" }}>
+              <h2
+                className="section-title"
+                style={{ fontSize: "clamp(28px, 4vw, 42px)" }}
+              >
                 Let’s work together
               </h2>
 
               <div className="contact-list">
-                <div className="contact-pill">{profile?.email || "your@email.com"}</div>
-                <div className="contact-pill">{profile?.whatsapp || "+92 300 0000000"}</div>
                 <div className="contact-pill">
-                  {profile?.linkedin || "https://www.linkedin.com/in/ali-abdullah-028845333/"}
+                  {profile?.email || "your@email.com"}
+                </div>
+                <div className="contact-pill">
+                  {profile?.whatsapp || "+92 300 0000000"}
+                </div>
+                <div className="contact-pill">
+                  {profile?.linkedin ||
+                    "https://www.linkedin.com/in/ali-abdullah-028845333/"}
                 </div>
                 <div className="contact-pill">
                   {profile?.github || "github.com/your-github"}

@@ -32,19 +32,23 @@ export default function Services() {
           box-sizing: border-box;
         }
 
+        html, body {
+          overflow-x: hidden;
+        }
+
         .container {
           width: min(1240px, calc(100% - 32px));
           margin: 0 auto;
         }
 
         .hero-wrap {
-          padding-top: 34px;
+          padding-top: 28px;
           padding-bottom: 24px;
         }
 
         .hero-card {
           display: grid;
-          grid-template-columns: 1.2fr 0.8fr;
+          grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
           gap: 22px;
           border-radius: 30px;
           overflow: hidden;
@@ -61,6 +65,7 @@ export default function Services() {
           flex-direction: column;
           justify-content: center;
           min-height: 420px;
+          min-width: 0;
         }
 
         .hero-right {
@@ -68,6 +73,7 @@ export default function Services() {
           display: flex;
           align-items: stretch;
           justify-content: center;
+          min-width: 0;
         }
 
         .hero-visual {
@@ -81,6 +87,7 @@ export default function Services() {
           display: grid;
           gap: 14px;
           padding: 22px;
+          min-width: 0;
         }
 
         .visual-box {
@@ -113,6 +120,8 @@ export default function Services() {
           background: rgba(255,255,255,0.04);
           color: rgba(255,255,255,0.78);
           font-size: 12px;
+          max-width: 100%;
+          word-break: break-word;
         }
 
         .badge.accent {
@@ -133,6 +142,7 @@ export default function Services() {
           font-size: clamp(42px, 7vw, 78px);
           line-height: 0.96;
           letter-spacing: -0.07em;
+          overflow-wrap: anywhere;
         }
 
         .hero-copy {
@@ -162,6 +172,9 @@ export default function Services() {
           font-weight: 700;
           font-size: 14px;
           transition: 0.22s ease;
+          min-height: 48px;
+          line-height: 1.2;
+          text-align: center;
         }
 
         .btn-primary:hover {
@@ -182,6 +195,9 @@ export default function Services() {
           font-weight: 600;
           font-size: 14px;
           transition: 0.22s ease;
+          min-height: 48px;
+          line-height: 1.2;
+          text-align: center;
         }
 
         .btn-secondary:hover {
@@ -218,7 +234,7 @@ export default function Services() {
 
         .feature-strip {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(4, minmax(0, 1fr));
           gap: 16px;
           margin-top: 24px;
         }
@@ -229,6 +245,7 @@ export default function Services() {
           border-radius: 20px;
           padding: 20px;
           transition: 0.28s ease;
+          min-width: 0;
         }
 
         .feature-item:hover,
@@ -244,6 +261,7 @@ export default function Services() {
           font-weight: 700;
           letter-spacing: -0.04em;
           margin-bottom: 8px;
+          overflow-wrap: anywhere;
         }
 
         .feature-copy {
@@ -254,7 +272,7 @@ export default function Services() {
 
         .services-grid {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 20px;
           margin-top: 26px;
         }
@@ -267,6 +285,7 @@ export default function Services() {
           transition: 0.28s ease;
           position: relative;
           overflow: hidden;
+          min-width: 0;
         }
 
         .service-card::before {
@@ -299,6 +318,7 @@ export default function Services() {
           font-size: 30px;
           line-height: 1.08;
           letter-spacing: -0.04em;
+          overflow-wrap: anywhere;
         }
 
         .service-copy {
@@ -322,11 +342,13 @@ export default function Services() {
           background: rgba(255,255,255,0.04);
           color: rgba(255,255,255,0.74);
           font-size: 12px;
+          max-width: 100%;
+          word-break: break-word;
         }
 
         .bottom-grid {
           display: grid;
-          grid-template-columns: 1.15fr 0.85fr;
+          grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
           gap: 20px;
           margin-top: 34px;
         }
@@ -337,6 +359,7 @@ export default function Services() {
           border-radius: 24px;
           padding: 28px;
           transition: 0.28s ease;
+          min-width: 0;
         }
 
         .process-list {
@@ -354,6 +377,7 @@ export default function Services() {
           border-radius: 18px;
           background: rgba(255,255,255,0.03);
           border: 1px solid rgba(255,255,255,0.08);
+          min-width: 0;
         }
 
         .process-badge {
@@ -387,11 +411,206 @@ export default function Services() {
         }
 
         @media (max-width: 1080px) {
-          .hero-card,
+          .hero-card {
+            grid-template-columns: 1fr;
+          }
+
+          .hero-left {
+            min-height: auto;
+          }
+
+          .feature-strip {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+
+          .services-grid,
+          .bottom-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        @media (max-width: 720px) {
+          .container {
+            width: min(1240px, calc(100% - 20px));
+          }
+
+          .hero-wrap {
+            padding-top: 18px;
+            padding-bottom: 20px;
+          }
+
+          .hero-card {
+            border-radius: 22px;
+            gap: 0;
+          }
+
+          .hero-left {
+            padding: 22px 18px 16px;
+          }
+
+          .hero-right {
+            padding: 0 18px 18px;
+          }
+
+          .hero-visual {
+            padding: 16px;
+            border-radius: 20px;
+          }
+
+          .badge-row {
+            margin-bottom: 16px;
+          }
+
+          .hero-title {
+            font-size: clamp(34px, 11vw, 54px);
+            line-height: 0.98;
+          }
+
+          .hero-copy {
+            font-size: 14px;
+            line-height: 1.75;
+          }
+
+          .hero-actions {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-top: 20px;
+          }
+
+          .hero-actions .btn-primary,
+          .hero-actions .btn-secondary {
+            width: 100%;
+          }
+
+          .section {
+            padding-top: 26px;
+          }
+
+          .section-title {
+            font-size: clamp(26px, 8vw, 34px);
+            line-height: 1.08;
+          }
+
+          .section-copy {
+            font-size: 14px;
+            line-height: 1.75;
+          }
+
           .feature-strip,
           .services-grid,
           .bottom-grid {
             grid-template-columns: 1fr;
+            gap: 16px;
+          }
+
+          .feature-item,
+          .service-card,
+          .info-card {
+            border-radius: 18px;
+          }
+
+          .feature-item,
+          .service-card,
+          .info-card {
+            padding: 18px;
+          }
+
+          .service-title {
+            font-size: 22px;
+          }
+
+          .process-item {
+            grid-template-columns: 46px 1fr;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 16px;
+          }
+
+          .process-badge {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            font-size: 13px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .container {
+            width: min(1240px, calc(100% - 16px));
+          }
+
+          .hero-left {
+            padding: 18px 14px 14px;
+          }
+
+          .hero-right {
+            padding: 0 14px 14px;
+          }
+
+          .hero-visual {
+            padding: 14px;
+            border-radius: 18px;
+            gap: 12px;
+          }
+
+          .badge {
+            font-size: 11px;
+            padding: 7px 12px;
+          }
+
+          .eyebrow {
+            font-size: 13px;
+            margin-bottom: 10px;
+          }
+
+          .hero-title {
+            font-size: clamp(30px, 11vw, 42px);
+          }
+
+          .hero-copy,
+          .section-copy,
+          .service-copy,
+          .feature-copy,
+          .check-item {
+            font-size: 13px;
+          }
+
+          .btn-primary,
+          .btn-secondary {
+            font-size: 13px;
+            padding: 12px 16px;
+          }
+
+          .feature-item,
+          .service-card,
+          .info-card {
+            padding: 16px;
+          }
+
+          .service-title {
+            font-size: 20px;
+          }
+
+          .service-number {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 14px;
+          }
+
+          .process-item {
+            grid-template-columns: 1fr;
+          }
+
+          .process-badge {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+          }
+
+          .check-item {
+            padding: 12px 14px;
+            border-radius: 16px;
           }
         }
       `}</style>
@@ -431,108 +650,108 @@ export default function Services() {
 
             <div className="hero-right">
               <div className="hero-visual">
-<div
-  style={{
-    display: "grid",
-    gap: 14,
-    width: "100%",
-    minHeight: "100%",
-  }}
->
-  <div
-    style={{
-      borderRadius: 22,
-      border: "1px solid rgba(255,255,255,0.08)",
-      background:
-        "radial-gradient(circle at 80% 20%, rgba(255,179,92,0.16), transparent 18%), rgba(255,255,255,0.03)",
-      padding: 20,
-      minHeight: 150,
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "space-between",
-    }}
-  >
-    <div
-      style={{
-        color: "rgba(255,255,255,0.45)",
-        fontSize: 12,
-        textTransform: "uppercase",
-        letterSpacing: "0.14em",
-      }}
-    >
-      Problem
-    </div>
+                <div
+                  style={{
+                    display: "grid",
+                    gap: 14,
+                    width: "100%",
+                    minHeight: "100%",
+                  }}
+                >
+                  <div
+                    style={{
+                      borderRadius: 22,
+                      border: "1px solid rgba(255,255,255,0.08)",
+                      background:
+                        "radial-gradient(circle at 80% 20%, rgba(255,179,92,0.16), transparent 18%), rgba(255,255,255,0.03)",
+                      padding: 20,
+                      minHeight: 150,
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <div
+                      style={{
+                        color: "rgba(255,255,255,0.45)",
+                        fontSize: 12,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.14em",
+                      }}
+                    >
+                      Problem
+                    </div>
 
-    <div
-      style={{
-        fontSize: 26,
-        fontWeight: 700,
-        lineHeight: 1.25,
-      }}
-    >
-      Most digital work does not look bad.
-      <br />
-      It just does not feel finished.
-    </div>
-  </div>
+                    <div
+                      style={{
+                        fontSize: 26,
+                        fontWeight: 700,
+                        lineHeight: 1.25,
+                      }}
+                    >
+                      Most digital work does not look bad.
+                      <br />
+                      It just does not feel finished.
+                    </div>
+                  </div>
 
-  <div
-    style={{
-      borderRadius: 20,
-      border: "1px solid rgba(255,255,255,0.08)",
-      background: "rgba(255,255,255,0.03)",
-      padding: 18,
-    }}
-  >
-    <div style={{ color: "rgba(255,255,255,0.45)", fontSize: 12, marginBottom: 8 }}>
-      UI / UX
-    </div>
-    <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>
-      Better flow. Better structure.
-    </div>
-    <div style={{ color: "rgba(255,255,255,0.62)", fontSize: 14, lineHeight: 1.7 }}>
-      Screens that feel cleaner, clearer, and easier to trust.
-    </div>
-  </div>
+                  <div
+                    style={{
+                      borderRadius: 20,
+                      border: "1px solid rgba(255,255,255,0.08)",
+                      background: "rgba(255,255,255,0.03)",
+                      padding: 18,
+                    }}
+                  >
+                    <div style={{ color: "rgba(255,255,255,0.45)", fontSize: 12, marginBottom: 8 }}>
+                      UI / UX
+                    </div>
+                    <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>
+                      Better flow. Better structure.
+                    </div>
+                    <div style={{ color: "rgba(255,255,255,0.62)", fontSize: 14, lineHeight: 1.7 }}>
+                      Screens that feel cleaner, clearer, and easier to trust.
+                    </div>
+                  </div>
 
-  <div
-    style={{
-      borderRadius: 20,
-      border: "1px solid rgba(255,255,255,0.08)",
-      background: "rgba(255,255,255,0.03)",
-      padding: 18,
-    }}
-  >
-    <div style={{ color: "rgba(255,255,255,0.45)", fontSize: 12, marginBottom: 8 }}>
-      Websites
-    </div>
-    <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>
-      Stronger first impression.
-    </div>
-    <div style={{ color: "rgba(255,255,255,0.62)", fontSize: 14, lineHeight: 1.7 }}>
-      Not just pages. Something you can actually show with confidence.
-    </div>
-  </div>
+                  <div
+                    style={{
+                      borderRadius: 20,
+                      border: "1px solid rgba(255,255,255,0.08)",
+                      background: "rgba(255,255,255,0.03)",
+                      padding: 18,
+                    }}
+                  >
+                    <div style={{ color: "rgba(255,255,255,0.45)", fontSize: 12, marginBottom: 8 }}>
+                      Websites
+                    </div>
+                    <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>
+                      Stronger first impression.
+                    </div>
+                    <div style={{ color: "rgba(255,255,255,0.62)", fontSize: 14, lineHeight: 1.7 }}>
+                      Not just pages. Something you can actually show with confidence.
+                    </div>
+                  </div>
 
-  <div
-    style={{
-      borderRadius: 20,
-      border: "1px solid rgba(255,255,255,0.08)",
-      background: "rgba(255,255,255,0.03)",
-      padding: 18,
-    }}
-  >
-    <div style={{ color: "rgba(255,255,255,0.45)", fontSize: 12, marginBottom: 8 }}>
-      Frontend
-    </div>
-    <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>
-      Good design, properly translated.
-    </div>
-    <div style={{ color: "rgba(255,255,255,0.62)", fontSize: 14, lineHeight: 1.7 }}>
-      Clean implementation without breaking the whole visual feel.
-    </div>
-  </div>
-</div>
+                  <div
+                    style={{
+                      borderRadius: 20,
+                      border: "1px solid rgba(255,255,255,0.08)",
+                      background: "rgba(255,255,255,0.03)",
+                      padding: 18,
+                    }}
+                  >
+                    <div style={{ color: "rgba(255,255,255,0.45)", fontSize: 12, marginBottom: 8 }}>
+                      Frontend
+                    </div>
+                    <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>
+                      Good design, properly translated.
+                    </div>
+                    <div style={{ color: "rgba(255,255,255,0.62)", fontSize: 14, lineHeight: 1.7 }}>
+                      Clean implementation without breaking the whole visual feel.
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
