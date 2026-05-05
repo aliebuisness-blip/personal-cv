@@ -172,7 +172,7 @@ export default function Contact() {
         .section-copy {
           margin: 0;
           color: rgba(255,255,255,0.64);
-          maxWidth: 760px;
+          max-width: 760px;
           line-height: 1.8;
           font-size: 15px;
         }

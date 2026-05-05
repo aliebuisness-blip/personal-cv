@@ -31,8 +31,6 @@ function ProjectModal({ project, onClose }) {
   const [fade, setFade] = useState(true);
 
   useEffect(() => {
-    setFade(false);
-
     const timeout = setTimeout(() => {
       setDisplayedImage(images[currentIndex]);
       setFade(true);
@@ -61,11 +59,13 @@ function ProjectModal({ project, onClose }) {
 
   function prevImage() {
     if (images.length <= 1) return;
+    setFade(false);
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   }
 
   function nextImage() {
     if (images.length <= 1) return;
+    setFade(false);
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   }
 
@@ -102,6 +102,7 @@ function ProjectModal({ project, onClose }) {
             style={{
               position: "relative",
               height: 440,
+              maxHeight: "62vh",
               overflow: "hidden",
             }}
           >
@@ -199,7 +200,7 @@ function ProjectModal({ project, onClose }) {
                     e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
                   }}
                 >
-                  ‹
+                  {"<"}
                 </button>
 
                 <button
@@ -235,7 +236,7 @@ function ProjectModal({ project, onClose }) {
                     e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
                   }}
                 >
-                  ›
+                  {">"}
                 </button>
               </>
             )}
@@ -258,6 +259,7 @@ function ProjectModal({ project, onClose }) {
                   type="button"
                   onClick={(e) => {
                     e.stopPropagation();
+                    setFade(false);
                     setCurrentIndex(index);
                   }}
                   style={{
@@ -335,6 +337,7 @@ function ProjectModal({ project, onClose }) {
               fontSize: 38,
               lineHeight: 1.05,
               letterSpacing: "-0.05em",
+              overflowWrap: "anywhere",
             }}
           >
             {project.title}
@@ -487,7 +490,7 @@ function CategoryRow({ category, projects, onProjectClick }) {
               e.currentTarget.style.boxShadow = "none";
             }}
           >
-            ‹
+            {"<"}
           </button>
 
           <button
@@ -517,7 +520,7 @@ function CategoryRow({ category, projects, onProjectClick }) {
               e.currentTarget.style.boxShadow = "none";
             }}
           >
-            ›
+            {">"}
           </button>
         </div>
       </div>
@@ -606,6 +609,7 @@ function CategoryRow({ category, projects, onProjectClick }) {
                   margin: "0 0 10px 0",
                   fontSize: 24,
                   letterSpacing: "-0.03em",
+                  overflowWrap: "anywhere",
                 }}
               >
                 {project.title}
@@ -726,6 +730,10 @@ export default function WorkPage() {
     scrollbar-color: rgba(255,255,255,0.14) rgba(255,255,255,0.04);
   }
 
+  .project-card {
+    scroll-snap-align: start;
+  }
+
   /* 🔥 MOBILE FIXES */
 
   @media (max-width: 900px) {
@@ -757,6 +765,11 @@ export default function WorkPage() {
 
     .project-card {
       border-radius: 16px;
+    }
+
+    .projects-row {
+      scroll-snap-type: x mandatory;
+      gap: 14px !important;
     }
   }
 `}</style>

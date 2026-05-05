@@ -61,7 +61,11 @@ export default function ManageProjects() {
   }
 
   useEffect(() => {
-    fetchProjects();
+    const timeout = window.setTimeout(() => {
+      fetchProjects();
+    }, 0);
+
+    return () => window.clearTimeout(timeout);
   }, []);
 
   function startEdit(project) {

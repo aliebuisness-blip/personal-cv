@@ -111,6 +111,10 @@ export default function AddProject() {
     setManageStatus("");
   }
 
+  function cancelEdit() {
+    resetEditForm();
+  }
+
   function handleChange(e) {
     const { name, value, type, checked } = e.target;
     setForm((prev) => ({
@@ -775,11 +779,13 @@ export default function AddProject() {
 
         .projects-table-wrap {
           overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
         }
 
         table {
           width: 100%;
           border-collapse: collapse;
+          min-width: 760px;
         }
 
         th, td {
@@ -824,6 +830,63 @@ export default function AddProject() {
           .admin-grid,
           .row-2 {
             grid-template-columns: 1fr;
+          }
+
+          .panel {
+            border-radius: 20px;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .admin-shell {
+            width: 100%;
+          }
+
+          .topbar {
+            align-items: flex-start;
+          }
+
+          .tabs {
+            display: grid;
+            grid-template-columns: 1fr;
+          }
+
+          .tab-btn,
+          .btn-primary,
+          .btn-secondary,
+          .btn-small,
+          .btn-danger,
+          .btn-logout {
+            width: 100%;
+            min-height: 46px;
+          }
+
+          .panel {
+            border-radius: 18px;
+          }
+
+          .section-title {
+            font-size: 24px;
+            line-height: 1.12;
+          }
+
+          .input,
+          .textarea,
+          .select {
+            font-size: 14px;
+            padding: 12px 14px;
+          }
+
+          .checkbox-row,
+          .actions {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+          }
+
+          th,
+          td {
+            padding: 13px 12px;
           }
         }
       `}</style>
